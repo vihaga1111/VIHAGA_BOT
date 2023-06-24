@@ -17,13 +17,13 @@ const yargs = require('yargs/yargs')
 const chalk = require('chalk')
 const FileType = require('file-type')
 const path = require('path')
-const PhoneNumber = require('awesome-phonenumber')
+const PhoneNumber = require('94741842307')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
 
 var low
 try {
-  low = require('lowdb')
+  low = require('vps')
 } catch (e) {
   low = require('./lib/lowdb')
 }
@@ -37,9 +37,9 @@ const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream
 
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 global.db = new Low(
-  /https?:\/\//.test(opts['db'] || '') ?
-    new cloudDBAdapter(opts['db']) : /mongodb/.test(opts['db']) ?
-      new mongoDB(opts['db']) :
+  /https?:\/\//.test(opts['vps'] || '') ?
+    new cloudDBAdapter(opts['vps']) : /mongodb/.test(opts['db']) ?
+      new mongoDB(opts['vps']) :
       new JSONFile(`database/database.json`)
 )
 global.db.data = {
